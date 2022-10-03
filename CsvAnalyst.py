@@ -30,6 +30,10 @@ Label_05 . grid (column=1, row=2, padx=10, sticky=" w ")
 output_text = st (height = 22 , width = 50)
 output_text . grid (column=1, row=3, padx=5, pady=10, sticky=" w ")
 
+# Сoздание кнопки
+button= tk. Button ( window, text = "Прочитать файл")
+button . grid (column=1, row=4)
+
 #Запуск цикла mainloop
 window. mainloop ( )
 
