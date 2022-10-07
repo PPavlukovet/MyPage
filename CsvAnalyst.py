@@ -42,7 +42,7 @@ def do_dialog( ):
  
 #Обработка csv файла при помощи pandas
 def pandas_read_csv ( file_name):
-    df = pd. read_csv (file_name, header = None, sep = ';')    
+    df = pd. read_csv (file_name, header = 0, sep = ';')    
     cnt_columns = df. shape[1]
     cnt_rows = df. shape[0]
     Label_03 [ 'text'] = cnt_rows
@@ -55,15 +55,23 @@ def get_column(df, column_ix):
      for i in range (cnt_rows):
            lst. append ( df. iat [ i, column_ix] )
      return lst  
-    
+
+def meet_name (field):
+     checkfor=[ 'Вера','Анатолий','Мария', 'Артем', 'Алексей', 'Валерия', 'Наталья','Оксана','Галина','Марина','Вероника','Виталий','Борис','Диана','Ева']
+     for s in checkfor:
+         if s in str (field):  # Нашлось!
+               return True
+#Ничего не совпало
+     return False          
+        
 # Обработчик нажатия кнопки 
 def process_button ( ) :
    file_name = do_dialog( )
    Label_01 [ 'text' ] = file_name
    df = pandas_read_csv ( file_name) 
-   lst = get_column  (df, 0)
+   lst = get_column  (df, 2)
    for item in lst:
-         output_text. insert ( tk. END, str (item) + os. linesep) 
+         output_text. insert ( tk. END, str (item) +' '+ str (meet_name(item))+os. linesep) 
    mb. showinfo (title=None, message="Готово")
 
 # Сoздание кнопки
