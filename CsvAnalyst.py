@@ -55,7 +55,7 @@ def get_column(df, column_ix):
      for i in range (cnt_rows):
            lst. append ( df. iat [ i, column_ix] )
      return lst  
-
+# Поиск функции- есть ли имя в столбце
 def meet_name (field):
      checkfor=[ 'Вера','Анатолий','Мария', 'Артем', 'Алексей', 'Валерия', 'Наталья','Оксана','Галина','Марина','Вероника','Виталий','Борис','Диана','Ева']
      for s in checkfor:
@@ -69,24 +69,29 @@ def list_meet_name(fields_list):
     counter_meet=0
     for list_item in fields_list:
         counter_total+=1
-    if meet_name (list_item):
+        if meet_name (list_item):
              counter_meet +=1
     #Конец подсчета
     if counter_meet / counter_total  >  0.1:
        return True
     # Не набралось нужного количества совпадений
-    return False           
-        
+    return False
+ # Пройти все столбы              
+def check_all_colamns(df):
+    colamns_cnt=df.shape[1]
+    for i in range( colamns_cnt): #От 0 до colamns_cnt-1
+         lst=get_column(df,i)
+         if list_meet_name (lst):
+              output_text. insert ( tk. END, "В столбце"+ str(i+1)+"предположительно содержится имя."+os. linesep)
+         else:
+               output_text. insert ( tk. END, "Предложений для столбца"+ str(i+1)+"не найдено."+os. linesep)   
 # Обработчик нажатия кнопки 
 def process_button ( ) :
     file_name = do_dialog( )
     Label_01 [ 'text' ] = file_name
     df = pandas_read_csv ( file_name) 
-    lst = get_column  (df, 2)
-    if list_meet_name (lst):       
-        output_text. insert ( tk. END, "В списке предположительно  содержится имя."+os. linesep)
-    else:
-        output_text. insert ( tk. END, "Преположений для списка не найденою. "+os. linesep)      
+    check_all_colamns(df)
+
     mb. showinfo (title=None, message="Готово")
 
 # Сoздание кнопки
@@ -95,4 +100,5 @@ button . grid (column=1, row=4)
 
 #Запуск цикла mainloop
 window. mainloop ( )
+
 
