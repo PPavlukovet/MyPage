@@ -89,7 +89,7 @@ def check_all_colamns(df):
          result = list_meet_name (lst)
          if result [ 0 ]:             
               output_text. insert ( tk. END, "В столбце"+ str(i+1)+"предположительно содержится имя."+os. linesep)
-              output_text. insert ( tk. END, "Процент совпадений"+" { : . 2f } ". format (result [1] * 100)+ " %."+os. linesep)
+              output_text. insert ( tk. END, "Процент совпадений"+"{:.2f}".format(result[1]*100)+" %."+os. linesep)
          else:
                output_text. insert ( tk. END, "Предложений для столбца"+ str(i+1)+"не найдено."+os. linesep)   
 # Обработчик нажатия кнопки 
@@ -97,11 +97,7 @@ def process_button ( ) :
     file_name = do_dialog( )
     Label_01 [ 'text' ] = file_name
     df = pandas_read_csv ( file_name)
-    check_all_colamns(df)
-    lst = get_column  (df, 2)
- 
-    check_all_colamns(df)   
-    
+    check_all_colamns(df) 
     mb. showinfo (title=None, message="Готово")
 
 # Сoздание кнопки
